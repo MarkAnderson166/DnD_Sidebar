@@ -43,7 +43,11 @@ def open_notes():
 
   text_file = open("names.txt", "r")
   names = text_file.read()
-  names_box.insert("end-1c", names)
+
+      #remove last sessions initiative rolls
+  for name in names:
+    name = name.translate(translation_table)
+    names_box.insert("end-1c", name)
   text_file.close()
 
 def save():
@@ -70,7 +74,6 @@ def move_turn_arrow():
   players = len(names_box.get(1.0, "end-1c").split('\n'))
 
   if any(char.isdigit() for char in int_rolls) and not pad == players:
-
     text_box('wrong button?, you must set before next')
 
   else:
@@ -100,22 +103,24 @@ def sort_initiative():
     int_roll_box.delete("1.0","end-1c")
     int_roll_box.insert("end-1c", '>')
 
-   # magic
-
     names_box.delete("1.0","end-1c")
-    translation_table = str.maketrans('', '', '0123456789 ')
+    players_sorted = []
     for i in range(len(players)):
       name = players[i].translate(translation_table)
       roll = int_roll[i]
       if len(roll) == 1:
         roll = '0%s'%roll
-      name = '%s %s\n' % (roll, name)
+      name = '%s - %s\n' % (roll, name)
+      players_sorted.append(name)
+
+    players_sorted = sorted(players_sorted, key=lambda s: int(s[:2]),reverse=1)
+    for name in players_sorted:
       names_box.insert("end-1c", name)
 
 
 
 WIDTH = 320
-HEIGHT = 800
+HEIGHT = 650
 
 root = tk.Tk()
 root.title("DnD Sidebar")
@@ -124,9 +129,10 @@ canvas = tk.Canvas(root, height=HEIGHT, width=WIDTH)
 canvas.configure(bg='#222')
 canvas.pack()
 text_box_array = []
+translation_table = str.maketrans('', '', '0123456789 -')
 
 
-notes_frame = tk.Frame(canvas, width=WIDTH-135, height=HEIGHT/2, bg='#222')
+notes_frame = tk.Frame(canvas, width=WIDTH-165, height=HEIGHT/2, bg='#222')
 canvas.create_window(2, 2, window=notes_frame, anchor="nw")
 notes_box = tk.Text(notes_frame, bg='#223', foreground="light grey",
                   insertbackground='white', font=("Arial", 14),
@@ -134,14 +140,14 @@ notes_box = tk.Text(notes_frame, bg='#223', foreground="light grey",
 notes_box.place(x=5, y=5)
 
 turn_frame = tk.Frame(canvas, width=30, height=HEIGHT/2, bg='#222')
-canvas.create_window(WIDTH-130, 2, window=turn_frame, anchor="nw")
+canvas.create_window(WIDTH-160, 2, window=turn_frame, anchor="nw")
 int_roll_box = tk.Text(turn_frame, bg='#232', foreground="light grey",
                   insertbackground='white', font=("Arial", 14),
                   bd=0, relief='ridge')
 int_roll_box.place(x=5, y=5)
 
-turn_frame = tk.Frame(canvas, width=95, height=HEIGHT/2, bg='#222')
-canvas.create_window(WIDTH-100, 2, window=turn_frame, anchor="nw")
+turn_frame = tk.Frame(canvas, width=125, height=HEIGHT/2, bg='#222')
+canvas.create_window(WIDTH-130, 2, window=turn_frame, anchor="nw")
 names_box = tk.Text(turn_frame, bg='#322', foreground="light grey",
                   insertbackground='white', font=("Arial", 14),
                   bd=0, relief='ridge')
@@ -154,7 +160,7 @@ button_1_label = '1'
 def button_1_func():
   dice(1,4,4)
 
-button_2_label = '5'
+button_2_label = '2'
 def button_2_func():
   dice(2,6,5)
 
@@ -172,60 +178,60 @@ style.theme_use("clam")
 style.configure('TButton', background='#444', foreground='#fff', relief='flat')
 style.map('TButton', background=[('active', '#555')])
 
-btnO_Y = 390
-btnS_X = 95
-btnS_Y = btnS_X
+btnO_Y = 320
+btnS_X = 100
+btnS_Y = 60
 
 
 # main 4 buttons
 buttonReset=ttk.Button(root, text=button_1_label, style="TButton",
                       command=button_1_func).place(
-                      x=10, y=HEIGHT-btnO_Y,
+                      x=5, y=HEIGHT-btnO_Y,
                       width=btnS_X, height=btnS_Y)
 
 buttonReset=ttk.Button(root, text=button_2_label, style="TButton",
                       command=button_2_func).place(
-                      x=15+btnS_X, y=HEIGHT-btnO_Y,
+                      x=11+btnS_X, y=HEIGHT-btnO_Y,
                       width=btnS_X, height=btnS_Y)
 
 buttonReset=ttk.Button(root, text=button_3_label, style="TButton",
                       command=button_3_func).place(
-                      x=10, y=HEIGHT-btnO_Y+btnS_Y+5,
+                      x=5, y=HEIGHT-btnO_Y+btnS_Y+5,
                       width=btnS_X, height=btnS_Y)
 
 buttonReset=ttk.Button(root, text=button_4_label, style="TButton",
                       command=button_4_func).place(
-                      x=15+btnS_X, y=HEIGHT-btnO_Y+btnS_Y+5,
+                      x=11+btnS_X, y=HEIGHT-btnO_Y+btnS_Y+5,
                       width=btnS_X, height=btnS_Y)
 
 
 # turn tracker buttons
 buttonReset=ttk.Button(root, text="Next", style="TButton",
                       command=move_turn_arrow).place(
-                      x=btnS_X*2.3, y=HEIGHT-btnO_Y,
+                      x=17+btnS_X*2, y=HEIGHT-btnO_Y,
                       width=btnS_X, height=btnS_Y)
 
 buttonReset=ttk.Button(root, text="Set Initiative", style="TButton",
                       command=sort_initiative).place(
-                      x=btnS_X*2.3, y=HEIGHT-btnO_Y+btnS_Y+5,
+                      x=17+btnS_X*2, y=HEIGHT-btnO_Y+btnS_Y+5,
                       width=btnS_X, height=btnS_Y)
 
 
 # bottom buttons
 buttonReset=ttk.Button(root, text="Save", style="TButton",
                       command=save).place(
-                      x=10, y=HEIGHT-btnS_Y/2-5,
-                      width=btnS_X, height=btnS_Y/2)
+                      x=5, y=HEIGHT-btnS_Y/1.5-5,
+                      width=btnS_X, height=btnS_Y/1.5)
 
 buttonReset=ttk.Button(root, text="About", style="TButton",
                       command=save).place(
-                      x=15+btnS_X, y=HEIGHT-btnS_Y/2-5,
-                      width=btnS_X, height=btnS_Y/2)
+                      x=11+btnS_X, y=HEIGHT-btnS_Y/1.5-5,
+                      width=btnS_X, height=btnS_Y/1.5)
 
 buttonReset=ttk.Button(root, text="Exit", style="TButton",
                       command=save_and_quit).place(
-                      x=btnS_X*2.3, y=HEIGHT-btnS_Y/2-5,
-                      width=btnS_X, height=btnS_Y/2)
+                      x=17+btnS_X*2, y=HEIGHT-btnS_Y/1.5-5,
+                      width=btnS_X, height=btnS_Y/1.5)
 
 
   # -- mouse
