@@ -6,6 +6,26 @@ import tkinter as tk
 from tkinter import ttk
 from random import *
 
+# button functions
+
+button_1_label = '1'
+red_list = ['1','2']
+def button_1_func():
+  text_box('Red: %s' % choice(red_list) )
+
+button_2_label = '2'
+def button_2_func():
+  dice(2,6,5)
+
+button_3_label = '3'
+def button_3_func():
+  dice(3,8,6)
+
+button_4_label = '4'
+def button_4_func():
+  dice(4,12,7)
+
+
 
 def text_box(text):
   canvas.delete('text_box_entry')
@@ -118,6 +138,7 @@ def sort_initiative():
       names_box.insert("end-1c", name)
 
 
+#  GUI 
 
 WIDTH = 320
 HEIGHT = 650
@@ -126,52 +147,35 @@ root = tk.Tk()
 root.title("DnD Sidebar")
 root.attributes('-topmost',True)
 canvas = tk.Canvas(root, height=HEIGHT, width=WIDTH)
-canvas.configure(bg='#222')
+canvas.configure(bg='#111')
 canvas.pack()
 text_box_array = []
 translation_table = str.maketrans('', '', '0123456789 -')
 
 
-notes_frame = tk.Frame(canvas, width=WIDTH-165, height=HEIGHT/2, bg='#222')
-canvas.create_window(2, 2, window=notes_frame, anchor="nw")
-notes_box = tk.Text(notes_frame, bg='#223', foreground="light grey",
+notes_frame = tk.Frame(canvas, width=WIDTH-165, height=HEIGHT/2-5, bg='#111')
+canvas.create_window(5, 5, window=notes_frame, anchor="nw")
+notes_box = tk.Text(notes_frame, bg='#112', foreground="light grey",
                   insertbackground='white', font=("Arial", 14),
                   bd=0, relief='ridge')
 notes_box.place(x=5, y=5)
 
-turn_frame = tk.Frame(canvas, width=30, height=HEIGHT/2, bg='#222')
-canvas.create_window(WIDTH-160, 2, window=turn_frame, anchor="nw")
-int_roll_box = tk.Text(turn_frame, bg='#232', foreground="light grey",
+turn_frame = tk.Frame(canvas, width=30, height=HEIGHT/2-5, bg='#111')
+canvas.create_window(WIDTH-160, 5, window=turn_frame, anchor="nw")
+int_roll_box = tk.Text(turn_frame, bg='#121', foreground="light grey",
                   insertbackground='white', font=("Arial", 14),
                   bd=0, relief='ridge')
 int_roll_box.place(x=5, y=5)
 
-turn_frame = tk.Frame(canvas, width=125, height=HEIGHT/2, bg='#222')
-canvas.create_window(WIDTH-130, 2, window=turn_frame, anchor="nw")
-names_box = tk.Text(turn_frame, bg='#322', foreground="light grey",
+turn_frame = tk.Frame(canvas, width=125, height=HEIGHT/2-5, bg='#111')
+canvas.create_window(WIDTH-130, 5, window=turn_frame, anchor="nw")
+names_box = tk.Text(turn_frame, bg='#211', foreground="light grey",
                   insertbackground='white', font=("Arial", 14),
                   bd=0, relief='ridge')
 names_box.place(x=5, y=5)
 
 
-    # buttons
-
-button_1_label = '1'
-def button_1_func():
-  dice(1,4,4)
-
-button_2_label = '2'
-def button_2_func():
-  dice(2,6,5)
-
-button_3_label = '3'
-def button_3_func():
-  dice(3,8,6)
-
-button_4_label = '4'
-def button_4_func():
-  dice(4,12,7)
-
+  # buttons
 
 style = ttk.Style()
 style.theme_use("clam")

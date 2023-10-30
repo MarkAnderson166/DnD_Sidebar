@@ -1,7 +1,7 @@
-23 - Morgan
-18 - boss
-17 - npc
-16 - npc
-14 - Carla
-12 - Nokia
-01 - Elaine
+Morgan
+Boss
+Goblin
+Orc
+Carla
+Nokia
+Elaine
