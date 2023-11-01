@@ -1,7 +1,0 @@
-42 - Carla
-26 - Nokia
-12 - Morgan
-12 - Orc
-04 - Goblin
-04 - Elaine
-02 - Boss

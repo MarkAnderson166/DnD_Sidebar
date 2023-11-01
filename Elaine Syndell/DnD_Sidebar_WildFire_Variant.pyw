@@ -9,15 +9,23 @@ from random import *
 # button functions
 
 button_1_label = 'Wildfire\n(combat)'
-red_list_combat = ['1','2']
+red_list_combat = ['Heroic', 'Terrified', 'Bloodthirsty',
+                  'Hesitant', 'Desperate', 'Paralyzed',
+                  'Ruthless', 'Aggressive', 'Shaken', 
+                  'Victorious', 'Wounded']
 def button_1_func():
-  text_box('Red: %s' % choice(red_list_combat) )
+  text_box('Wildfire (combat): %s' % choice(red_list_combat) )
+  #dice(4,5)
+
 
 button_2_label = 'Wildfire\n(social)'
-red_list_social = ['1','2']
+red_list_social = ['Relaxed', 'Anxious', 'Bored',
+                  'Frustrated', 'Playful', 'Optimistic',
+                  'Indifferent', 'Grateful', 'Impatient',
+                  'Distrustful', 'Enthusiastic', 'Curious']
 def button_2_func():
-  text_box('Red: %s' % choice(red_list_social) )
-
+  text_box('Wildfire (social): %s' % choice(red_list_social) )
+  #dice(2,4,1)
 
 
 def text_box(text):
@@ -39,12 +47,18 @@ def text_box(text):
                          text= line, fill=rgb, tags='text_box_entry')
 
 
-def dice(number,dice,plus):
+def dice(number,dice,plus=0):
   result = plus
+  arr = []
   for i in range(number):
     roll = randint(1,dice)
+    arr.append(roll)
     result = result+roll
-  text_box('%sd%s+%s = %s'%(number, dice, plus, result))
+  if plus:
+    arr.append(plus)
+    text_box('%sd%s+%s = %s = %s'%(number, dice, plus, arr, result))
+  else:
+    text_box('%sd%s = %s = %s'%(number, dice, arr, result))
   return result
 
 
