@@ -1,0 +1,16 @@
+Battle Maneuvers
+     DC = Str 15
+     Push - 15ft
+     Trip - prone
+     Disarm
+
+Sneak:  1d6        1 per turn
+   adv or foe of target in 5ft
+
+Bow +5 ;      1d8+15
+  (sharpshooter)
+
+Rapier +7 ;    1d8+4
+
+Second wind
+Action Surge

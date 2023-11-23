@@ -5,6 +5,7 @@
 import tkinter as tk
 from tkinter import ttk
 from random import *
+from time import time, sleep
 
 # button functions
 
@@ -15,7 +16,8 @@ red_list_combat = ['Heroic', 'Terrified', 'Bloodthirsty',
                   'Victorious', 'Wounded']
 def button_1_func():
   text_box('Wildfire (combat): %s' % choice(red_list_combat) )
-  #dice(4,5)
+  tksleep(3)
+  canvas.after(6000,dice(4,5))
 
 
 button_2_label = 'Wildfire\n(social)'
@@ -93,6 +95,15 @@ def save_and_quit():
   quit()
 
 
+def tksleep(t):
+    'emulating time.sleep(seconds)'
+    ms = int(t*1000)
+    root = tk._get_default_root('sleep')
+    var = tk.IntVar(root)
+    root.after(ms, var.set, 1)
+    root.wait_variable(var)
+
+
 def move_turn_arrow():
 
   pointer = ''
@@ -151,7 +162,7 @@ def sort_initiative():
 #  GUI 
 
 WIDTH = 320
-HEIGHT = 720
+HEIGHT = 850
 
 root = tk.Tk()
 root.title("DnD Sidebar")
