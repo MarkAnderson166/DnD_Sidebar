@@ -1,16 +1,16 @@
 Battle Maneuvers
-     DC = Str 15
-     Push - 15ft
-     Trip - prone
-     Disarm
+     Push - 15ft  - str 17
+     Trip - str 17
+     Goading - wis 17
 
-Sneak:  1d6        1 per turn
-   adv or foe of target in 5ft
-
-Bow +5 ;      1d8+15
+Bow +7 ;      1d8+18
   (sharpshooter)
-
-Rapier +7 ;    1d8+4
+Rapier +9 ;    1d8+5
 
 Second wind
 Action Surge
+
+Healing light
+bonus action 1 or 2 d6 
+5 total d6 per long rest
+
