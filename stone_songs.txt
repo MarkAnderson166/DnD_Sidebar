@@ -5,19 +5,31 @@ Hobbiton, Rohan,
 Command		NFI song
 
 	Cantrip
-Toll the Dead		Rand Harmonic
-Guidance		Rand Major 
-
+Toll the Dead		R Harmonic
+Guidance		R Maj Chord 
 
 	1st Level
 Healing Word		Over Rainbow
 		Voodoo Lady
 		Scumm Bar
-	2nd Level
+		Call of Cthulu1
+		Call of Cthulu2
+		Come Over
+		Hero of the day
+		Thunder Struck
+Dissonatte Whispers
+Faerie Fire
+Detect Magic
+Comprehend Language
+Charm Person
 
+	2nd Level
+Invisiblility
+Suggestion
+Heat Metal
 
 	3rd Level
 Tiny Hut		Alabama
 
-Fireball		Jump in the fire
-Reviverfiy		Hallelujah
+Counterspell		R Blues Lick
+Spirit Guardians		Hallelujah
